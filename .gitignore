@@ -1,0 +1,7 @@
+*.xpi
+chrome
+firefox
+temp
+local
+*.sh
+*.bat

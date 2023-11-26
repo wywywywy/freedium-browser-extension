@@ -1,0 +1,25 @@
+{
+  "name": "Open in Freedium",
+  "version": "1.0",
+  "manifest_version": 2,
+  "background": {
+    "scripts": ["background.js"],
+    "persistent": false
+  },
+  "permissions": [
+    "contextMenus"
+  ],
+  "browser_action": {},
+  "icons": {
+    "32": "logo-32.png",
+    "48": "logo-48.png",
+    "64": "logo-64.png",
+    "128": "logo-128.png"
+  },
+  "applications": {
+    "gecko": {
+      "id": "freedium-browser-extension@wywywywy.com"
+    }
+  },
+  "content_security_policy": "script-src 'self'; object-src 'self'"
+}
