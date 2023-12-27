@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Open in Freedium - Options</title>
+    <style>
+      #status {
+        color: #090;
+        min-height: 1.5em;
+      }
+      #save {
+        width: 100%;
+      }
+      code {
+        font-size: 1.5em;
+      }
+      body {
+        max-width: 400px;
+      }
+      textarea {
+        width: 99%;
+      }
+    </style>
+  </head>
+  <body>
+    <h3>
+      By default this extension can open a page on "medium.com" in Freedium.
+      Here you can add additional patterns for the extension to handle.
+    </h3>
+    <p>One per line. Wildcard supported.</p>
+    <p>
+      Examples: <br />
+      <code>*://example.com/*</code><br />
+      <code>*://*.example.com/*</code><br />
+      <code>*://*.example.com/articles/*</code><br />
+    </p>
+
+    <textarea
+      id="custom_patterns"
+      name="custom_patterns"
+      rows="10"
+      cols="50"
+      placeholder="*://*.example.com/*"
+    >
+    </textarea>
+
+    <button id="save">Save</button>
+    <div id="status"></div>
+
+    <script src="options.js"></script>
+  </body>
+</html>
