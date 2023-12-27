@@ -26,27 +26,42 @@ const CONTEXT_MENU_CONTENTS = {
 }
 
 const setUpContextMenus = () => {
-  CONTEXT_MENU_CONTENTS.link.forEach((command) => {
-    chrome.contextMenus.create({
-      title: command.title,
-      type: command.type,
-      id: command.id,
-      targetUrlPatterns: command.targetUrlPatterns,
-      contexts: ['link'],
-    });
-  });
-  CONTEXT_MENU_CONTENTS.page.forEach((command) => {
-    chrome.contextMenus.create({
-      title: command.title,
-      type: command.type,
-      id: command.id,
-      documentUrlPatterns: command.documentUrlPatterns,
-      contexts: ['page'],
-    });
-  });
+  chrome.storage.sync.get(
+    { patterns: '' },
+    (items) => {
+      /** @type {string} */
+      const patterns = items.patterns;
+      const patternsArray = patterns.replace(/\r/g, '').split('\n').filter(p => p).map(p => p.trim());
+
+      CONTEXT_MENU_CONTENTS.link.forEach((command) => {
+        chrome.contextMenus.create({
+          title: command.title,
+          type: command.type,
+          id: command.id,
+          targetUrlPatterns: command.targetUrlPatterns.concat(patternsArray),
+          contexts: ['link'],
+        });
+      });
+      CONTEXT_MENU_CONTENTS.page.forEach((command) => {
+        chrome.contextMenus.create({
+          title: command.title,
+          type: command.type,
+          id: command.id,
+          documentUrlPatterns: command.documentUrlPatterns.concat(patternsArray),
+          contexts: ['page'],
+        });
+      });
+    }
+  );
 };
 
-const freedium = (url, newTab) => {
+/**
+ * Open a URL in Freedium
+ * @param {string} url 
+ * @param {boolean} newTab - open in a new tab?
+ * @returns 
+ */
+const openInFreedium = (url, newTab) => {
   if (!url) {
     return;
   }
@@ -66,13 +81,23 @@ chrome.runtime.onInstalled.addListener(() => {
   setUpContextMenus();
 });
 
+chrome.runtime.onMessage.addListener(
+  (request, sender, sendResponse) => {
+    if (request.message === "settingsSaved") {
+      chrome.contextMenus.removeAll(() => {
+        setUpContextMenus();
+      });
+    }
+  }
+);
+
 chrome.contextMenus.onClicked.addListener((item) => {
   switch (item.menuItemId) {
     case 'freedium-link':
-      freedium(item.linkUrl, true);
+      openInFreedium(item.linkUrl, true);
       break;
     case 'freedium-page':
-      freedium(item.pageUrl, false);
+      openInFreedium(item.pageUrl, false);
       break;
   }
 });
