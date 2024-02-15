@@ -8,6 +8,6 @@ Simply right click on any Medium link, or right click on anywhere in a Medium ar
 
 You can also go to the Options page and add custom patterns in addition to "medium.com".
 
-Chrome Web Store: https://chrome.google.com/webstore/detail/open-in-freedium/giibjnmcmkglpdichdiabecdkeefknak
+**Chrome Web Store**: ~https://chrome.google.com/webstore/detail/open-in-freedium/giibjnmcmkglpdichdiabecdkeefknak~ (removed by Google as it violates store policy)
 
-Firefox Add-on: https://addons.mozilla.org/en-GB/firefox/addon/open-in-freedium/
+**Firefox Add-on**: https://addons.mozilla.org/en-GB/firefox/addon/open-in-freedium/
