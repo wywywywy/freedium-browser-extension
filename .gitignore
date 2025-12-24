@@ -5,3 +5,4 @@ temp
 local
 *.sh
 *.bat
+web-ext-artifacts/*
