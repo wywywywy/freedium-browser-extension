@@ -1,9 +1,22 @@
 // Saves options to chrome.storage
 const saveOptions = () => {
   const patterns = document.getElementById('custom_patterns').value;
+  let freediumBaseUrl = document.getElementById('freedium-url').value.trim();
+
+  if ( !freediumBaseUrl ) {
+    freediumBaseUrl = 'https://freedium-mirror.cfd/';
+  }
+
+  // Ensure trailing slash
+  if (!freediumBaseUrl.endsWith('/')) {
+    freediumBaseUrl += '/';
+  }
 
   chrome.storage.sync.set(
-    { patterns: patterns, },
+    { 
+      patterns: patterns,
+      freediumBaseUrl
+    },
     () => {
       // Update status to let user know options were saved.
       const status = document.getElementById('status');
@@ -22,9 +35,13 @@ const saveOptions = () => {
 // stored in chrome.storage.
 const restoreOptions = () => {
   chrome.storage.sync.get(
-    { patterns: '' },
+    { 
+      patterns: '',
+      freediumBaseUrl: 'https://freedium-mirror.cfd/'
+    },
     (items) => {
       document.getElementById('custom_patterns').value = items.patterns;
+      document.getElementById('freedium-url').value = items.freediumBaseUrl;
     }
   );
 };

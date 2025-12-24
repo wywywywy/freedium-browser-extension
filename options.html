@@ -2,26 +2,14 @@
 <html>
   <head>
     <title>Open in Freedium - Options</title>
-    <style>
-      #status {
-        color: #090;
-        min-height: 1.5em;
-      }
-      #save {
-        width: 100%;
-      }
-      code {
-        font-size: 1.5em;
-      }
-      body {
-        max-width: 400px;
-      }
-      textarea {
-        width: 99%;
-      }
-    </style>
+    <link rel="stylesheet" href="style.css">
   </head>
   <body>
+    <h3>Local URL to hook: </h3>
+    <div class="input-freedium-url">
+      <input type="text" id="freedium-url" placeholder="default: https://freedium-mirror.cfd/"/>
+      <!-- <button id="save-freedium-url">Save</button> -->
+    </div>
     <h3>
       By default this extension can open a page on "medium.com" in Freedium.
       Here you can add additional patterns for the extension to handle.

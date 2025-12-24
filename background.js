@@ -62,19 +62,20 @@ const setUpContextMenus = () => {
  * @returns 
  */
 const openInFreedium = (url, newTab) => {
-  if (!url) {
-    return;
-  }
+  if (!url) return;
 
-  if (newTab) {
-    chrome.tabs.create({
-      url: 'https://freedium.cfd/' + url,
-    })
-  } else {
-    chrome.tabs.update({
-      url: 'https://freedium.cfd/' + url,
-    })
-  }
+  chrome.storage.sync.get(
+    { freediumBaseUrl: 'https://freedium.cfd/' },
+    (items) => {
+      const finalUrl = items.freediumBaseUrl + url;
+
+      if (newTab) {
+        chrome.tabs.create({ url: finalUrl });
+      } else {
+        chrome.tabs.update({ url: finalUrl });
+      }
+    }
+  );
 };
 
 chrome.runtime.onInstalled.addListener(() => {
