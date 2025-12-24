@@ -19,17 +19,8 @@ textarea {
     width: 99%;
 }
 
-.input-freedium-url button {
-    padding: 4px 12px;
-}
-
-/* .input-freedium-url button:hover {
-    background-color: pink;
-    color: white;
-} */
-
 .input-freedium-url input {
     height: 30px;
-    width: 70%;
+    width: 100%;
     box-sizing: border-box;
 }
