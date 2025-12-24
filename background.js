@@ -61,20 +61,25 @@ const setUpContextMenus = () => {
  * @param {boolean} newTab - open in a new tab?
  * @returns 
  */
-const openInFreedium = (url, newTab) => {
-  if (!url) {
-    return;
-  }
+const openInFreedium = (url, fallbackNewTab) => {
+  if (!url) return;
 
-  if (newTab) {
-    chrome.tabs.create({
-      url: 'https://freedium.cfd/' + url,
-    })
-  } else {
-    chrome.tabs.update({
-      url: 'https://freedium.cfd/' + url,
-    })
-  }
+  chrome.storage.sync.get(
+    {
+      freediumBaseUrl: 'https://freedium-mirror.cfd/',
+      openInNewTab: true,
+    },
+    ({ freediumBaseUrl, openInNewTab }) => {
+      const finalUrl = freediumBaseUrl + url;
+      const newTab = openInNewTab ?? fallbackNewTab;
+
+      if (newTab) {
+        chrome.tabs.create({ url: finalUrl });
+      } else {
+        chrome.tabs.update({ url: finalUrl });
+      }
+    }
+  );
 };
 
 chrome.runtime.onInstalled.addListener(() => {

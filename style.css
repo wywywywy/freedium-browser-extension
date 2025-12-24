@@ -1,0 +1,26 @@
+#status {
+    color: #090;
+    min-height: 1.5em;
+}
+
+#save {
+    width: 100%;
+}
+
+code {
+    font-size: 1.5em;
+}
+
+body {
+    max-width: 400px;
+}
+
+textarea {
+    width: 99%;
+}
+
+.input-freedium-url input {
+    height: 30px;
+    width: 100%;
+    box-sizing: border-box;
+}
