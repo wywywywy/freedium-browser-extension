@@ -61,13 +61,17 @@ const setUpContextMenus = () => {
  * @param {boolean} newTab - open in a new tab?
  * @returns 
  */
-const openInFreedium = (url, newTab) => {
+const openInFreedium = (url, fallbackNewTab) => {
   if (!url) return;
 
   chrome.storage.sync.get(
-    { freediumBaseUrl: 'https://freedium.cfd/' },
-    (items) => {
-      const finalUrl = items.freediumBaseUrl + url;
+    {
+      freediumBaseUrl: 'https://freedium-mirror.cfd/',
+      openInNewTab: true,
+    },
+    ({ freediumBaseUrl, openInNewTab }) => {
+      const finalUrl = freediumBaseUrl + url;
+      const newTab = openInNewTab ?? fallbackNewTab;
 
       if (newTab) {
         chrome.tabs.create({ url: finalUrl });
