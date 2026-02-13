@@ -68,11 +68,11 @@ const openInFreedium = (url, newTab) => {
 
   if (newTab) {
     chrome.tabs.create({
-      url: 'https://freedium.cfd/' + url,
+      url: 'https://freedium-mirror.cfd/' + url,
     })
   } else {
     chrome.tabs.update({
-      url: 'https://freedium.cfd/' + url,
+      url: 'https://freedium-mirror.cfd/' + url,
     })
   }
 };
