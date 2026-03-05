@@ -1,7 +1,5 @@
 *.xpi
-chrome
-firefox
-temp
-local
-*.sh
-*.bat
+chrome/
+firefox/
+temp/
+local/
